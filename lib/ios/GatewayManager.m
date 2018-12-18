@@ -8,6 +8,10 @@
 #import <BraintreeApplePay/BraintreeApplePay.h>
 #endif
 
+#if __has_include(<RCTCloudpayments/RCTCloudpayments.h>)
+#import <RCTCloudpayments/RCTCloudpayments.h>
+#endif
+
 @implementation GatewayManager
 
 + (NSArray *)getSupportedGateways
@@ -20,6 +24,10 @@
 
 #if __has_include(<BraintreeApplePay/BraintreeApplePay.h>)
     [supportedGateways addObject:@"braintree"];
+#endif
+    
+#if __has_include(<RCTCloudpayments/RCTCloudpayments.h>)
+    [supportedGateways addObject:@"cloudpayments"];
 #endif
 
     return [supportedGateways copy];
@@ -51,6 +59,11 @@
 #if __has_include(<BraintreeApplePay/BraintreeApplePay.h>)
     [self createBraintreeTokenWithPayment:payment completion:completion];
 #endif
+    
+#if __has_include(<RCTCloudpayments/RCTCloudpayments.h>)
+    [RCTCloudpayments createCloudpaymentsTokenWithPayment:payment completion:completion];
+#endif
+    
 }
 
 // Stripe
