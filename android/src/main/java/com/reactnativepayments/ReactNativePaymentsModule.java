@@ -169,7 +169,7 @@ public class ReactNativePaymentsModule extends ReactContextBaseJavaModule implem
                     public void onResult(@NonNull BooleanResult booleanResult) {
                         callback.invoke(booleanResult.getValue());
                     }
-                });
+                }, 5, TimeUnit.SECONDS);
     }
 
     @ReactMethod
